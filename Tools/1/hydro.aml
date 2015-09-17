@@ -1,0 +1,52 @@
+disp 9999
+mapextent dem54c
+gridpaint dem54c
+clear
+gridpaint dem54c value linear nowrap gray
+flowdir = flowdirection (dem54c)
+sinks = sink (flowdir)
+fill dem54c dem54d sink 100 flowdir1
+fill dem54d dem54e sink 200 flowdir2
+fill dem54e dem54f sink 300 flowdir3
+/*stream network delineation
+flowacc = flowaccumulation (flowdir3, runoff)
+str4000 = con ( flowacc > 4000, 1)
+str1000 = con ( flowacc > 1000, 2)
+str500 = con ( flowacc > 500, 3)
+str100 = con ( flowacc > 100, 4)
+str25 = con ( flowacc > 25, 5)
+clear
+gridpaint str4000
+gridpaint str1000
+gridpaint str500
+gridpaint str100
+gridpaint str25
+lnk4000 = streamlink ( str4000, flowdir3)
+lnk1000 = streamlink ( str1000, flowdir3)
+lnk500 = streamlink ( str500, flowdir3)
+lnk100 = streamlink ( str100, flowdir3)
+lnk25 = streamlink ( str25, flowdir3)
+/* max flowaccumulation
+acc4000 = zonalmax ( lnk4000, flowacc)
+acc1000 = zonalmax ( lnk1000, flowacc)
+acc500 = zonalmax ( lnk500, flowacc)
+acc100 = zonalmax ( lnk100, flowacc)
+acc25 = zonalmax ( lnk25, flowacc)
+/* outlet cells picking
+out4000 = con (acc4000 == flowacc, lnk4000)
+out1000 = con (acc1000 == flowacc, lnk1000)
+out500 = con (acc500 == flowacc, lnk500)
+out100 = con (acc100 == flowacc, lnk100)
+out25 = con (acc25 == flowacc, lnk25)
+/* watershed delineation
+shd4000 = watershed ( flowdir3, out4000)
+shd1000 = watershed ( flowdir3, out1000)
+shd500 = watershed ( flowdir3, out500)
+shd100 = watershed ( flowdir3, out100)
+shd25 = watershed ( flowdir3, out25)
+/* convert to poly
+covshd4000 = gridpoly ( shd4000)
+covshd1000 = gridpoly ( shd1000)
+covshd500 = gridpoly ( shd500)
+covshd100 = gridpoly ( shd100)
+covshd25 = gridpoly ( shd25)

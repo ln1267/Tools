@@ -1,0 +1,42 @@
+Sub 按钮1_单击()
+t = Timer
+Application.DisplayAlerts = False
+ Application.ScreenUpdating = False
+   mypath = ThisWorkbook.Path & "\xls文件\"
+   mypathtxt = ThisWorkbook.Path & "\dat文件\"
+   Set fso = CreateObject("scripting.filesystemobject")
+   myfilename = Dir(mypath & "*.xls")
+    Do While (Len(myfilename) > 0)
+       Set mybk = GetObject(mypath & myfilename)
+     For Each sh In mybk.Sheets
+        With sh
+           maxy = sh.[iv1].End(xlToLeft).Column
+           maxh = sh.[a65536].End(xlUp).Row
+           myfilename = mypathtxt & "\" & sh.Name & ".dat"
+             Set f = fso.createtextfile(myfilename, True, False)
+             For i = 1 To maxh
+                 x1 = myfill(Trim(.Cells(i, 1)), 5)
+                 x2 = myfill(Format(Trim(.Cells(i, 2)), "0.000000"), 14)
+                 x3 = myfill(Format(Trim(.Cells(i, 3)), "0.000000"), 14)
+                 x4 = myfill(Format(Trim(.Cells(i, 4)), "0.0"), 6)
+                 mystr = x1 & Space(1) & x2 & Space(1) & x3 & Space(1) & x4
+                  For k = 5 To maxy
+                 mystr = mystr & Space(1) & myfill(Format(Trim(.Cells(i, k)), "0.00"), 8)
+                         Next k
+                 f.writeline mystr
+                 mystr = ""
+                            Next i
+                 f.Close
+                    End With
+                                 Next
+            mybk.Close
+            myfilename = Dir()
+            Loop
+            Set mybk = Nothing: Set mybk = Nothing: Set sh = Nothing
+    Application.DisplayAlerts = True
+     Application.ScreenUpdating = True
+      MsgBox "导出完成了!!" & Chr(10) & Chr(13) & "总共花费时间:" & Timer - t & "秒"
+End Sub
+     Public Function myfill(x, cnt)
+       myfill = IIf(Len(x) = cnt, x, Space(cnt - Len(x)) & x)
+       End Function
