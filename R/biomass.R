@@ -12,7 +12,7 @@ library(randomForest)
 setwd("d:/saltbush/")
 
 setwd("J:/PhD/WICKEPIN/20160106")
-setwd("C:/Users/ning/Desktop/test")
+setwd("J:/PhD/WICKEPIN/20160106/test")
 
 data_24_03_11<-read.ENVI("24_03_11")
 
@@ -92,7 +92,7 @@ iris.rf<-randomForest(VEG ~.,test[ind==1,],ntree=500,nPerm=10,mtry=3,proximity=T
 #show the model
 print(iris.rf)
 importance(iris.rf)
-aap<-varImpPlot(iris.rf,n.var = 5)
+aap<-varImpPlot(iris.rf,n.var = 10)
 
 ggsave(aap,file ="1.pdf",dpi = 300)
 plot(iris.rf)
@@ -245,4 +245,29 @@ write.csv(Site_low_sum,"images/low_10_com1.csv")
 a$Density[a$Density=="HD"]==1
 
 with(a, slope.com(R_veg,C,site, method = 'SMA', alpha = 0.05)) 
-         
+ 
+
+# T_TEST        
+## difference of variables for saltbush and pasture
+
+library(Hmisc)
+describe(plot_f$VEG)
+describe(plot_10_f$VEG)
+str(plot_f)
+linshi<-plot_10_f
+for (i in 3:15) {
+  
+ a<-t.test(linshi[linshi$VEG==1,i],linshi[linshi$VEG==2,i])
+ print(c(names(linshi)[i],a$p.value))
+  
+}
+## difference of variables for different season
+linshi1<-plot_10_f
+linshi2<-plot_f
+for (i in 3:15) {
+  
+  #a<-t.test(linshi1[linshi1$VEG==2,i],linshi2[linshi2$VEG==2,i])
+  #print(c(names(linshi1)[i],a$p.value))
+  print(names(linshi)[i])
+  print(c(mean(linshi1[linshi1$VEG==2,i]),mean(linshi1[linshi1$VEG==1,i]),mean(linshi2[linshi2$VEG==2,i]),mean(linshi2[linshi2$VEG==1,i])),digits=3)
+}
