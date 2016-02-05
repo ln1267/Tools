@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualStudioProject ProjectCreator="Intel Fortran" Keyword="Console Application" Version="11.0" ProjectIdGuid="{B02F3085-4B06-4E0A-83DA-56A2C6BFCB16}">
+	<Platforms>
+		<Platform Name="Win32"/></Platforms>
+	<Configurations>
+		<Configuration Name="Debug|Win32">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" Interfaces="true" WarnInterfaces="true" Traceback="true" BoundsCheck="true" RuntimeLibrary="rtMultiThreadedDebug"/>
+				<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemConsole"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration>
+		<Configuration Name="Release|Win32">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true"/>
+				<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" SubSystem="subSystemConsole"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration></Configurations>
+	<Files>
+		<Filter Name="Header Files" Filter="fi;fd"/>
+		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
+		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
+		<File RelativePath="..\calconstant.f"/>
+		<File RelativePath="..\combinenodes.f"/>
+		<File RelativePath="..\combo.f"/>
+		<File RelativePath="..\compact.f"/>
+		<File RelativePath="..\converge.f"/>
+		<File RelativePath="..\dblcurve.f"/>
+		<File RelativePath="..\density.f"/>
+		<File RelativePath="..\diffusion.f"/>
+		<File RelativePath="..\dinsol.f"/>
+		<File RelativePath="..\fa.f"/>
+		<File RelativePath="..\fbb.f"/>
+		<File RelativePath="..\fbwmax.f"/>
+		<File RelativePath="..\fd.f"/>
+		<File RelativePath="..\fgrain.f"/>
+		<File RelativePath="..\filtrate.f"/>
+		<File RelativePath="..\fliquid.f"/>
+		<File RelativePath="..\flux.f"/>
+		<File RelativePath="..\fsat.f"/>
+		<File RelativePath="..\fssest.f"/>
+		<File RelativePath="..\ftemp.f"/>
+		<File RelativePath="..\fvapri.f"/>
+		<File RelativePath="..\fvaprw.f"/>
+		<File RelativePath="..\fz.f"/>
+		<File RelativePath="..\getinput.f"/>
+		<File RelativePath="..\getmet.f"/>
+		<File RelativePath="..\init.f"/>
+		<File RelativePath="..\insol.f"/>
+		<File RelativePath="..\meltzone.f"/>
+		<File RelativePath="..\metcalc.f"/>
+		<File RelativePath="..\newsnow.f"/>
+		<File RelativePath="..\nlimit.f"/>
+		<File RelativePath="..\nmelt.f"/>
+		<File RelativePath="..\old.f"/>
+		<File RelativePath="..\outfiltrate.f"/>
+		<File RelativePath="..\polythirdorder.f"/>
+		<File RelativePath="..\porosty.f"/>
+		<File RelativePath="..\qturb.f"/>
+		<File RelativePath="..\qturb3.f"/>
+		<File RelativePath="..\readtm.f"/>
+		<File RelativePath="..\reset.f"/>
+		<File RelativePath="..\rtsafe.f"/>
+		<File RelativePath="..\sdsol.f"/>
+		<File RelativePath="..\skyrad.f"/>
+		<File RelativePath="..\slope.f"/>
+		<File RelativePath="..\sntherm.f"/>
+		<File RelativePath="..\soil.f"/>
+		<File RelativePath="..\soilchart.f"/>
+		<File RelativePath="..\subdivide.f"/>
+		<File RelativePath="..\subtime.f"/>
+		<File RelativePath="..\thermal.f"/>
+		<File RelativePath="..\thparam.f"/>
+		<File RelativePath="..\thrk.f"/>
+		<File RelativePath="..\tridiag.f"/>
+		<File RelativePath="..\wetbulb.f"/>
+		<File RelativePath="..\wlimit.f"/>
+		<File RelativePath="..\write.f"/>
+		<File RelativePath="..\write2.f"/>
+		<File RelativePath="..\zen.f"/></Filter></Files>
+	<Globals/></VisualStudioProject>

@@ -1,0 +1,9 @@
+        !COMPILER-GENERATED INTERFACE MODULE: Fri May 10 09:47:39 2013
+        MODULE NLIMIT__genmod
+          INTERFACE 
+            SUBROUTINE NLIMIT(IBOUNDS,NZONE)
+              INTEGER(KIND=4) :: IBOUNDS(15,2)
+              INTEGER(KIND=4) :: NZONE
+            END SUBROUTINE NLIMIT
+          END INTERFACE 
+        END MODULE NLIMIT__genmod

@@ -1,0 +1,10 @@
+        !COMPILER-GENERATED INTERFACE MODULE: Fri May 10 09:47:42 2013
+        MODULE SOILCHART__genmod
+          INTERFACE 
+            SUBROUTINE SOILCHART(II,J,IUNIT)
+              INTEGER(KIND=4) :: II
+              INTEGER(KIND=4) :: J
+              INTEGER(KIND=4) :: IUNIT
+            END SUBROUTINE SOILCHART
+          END INTERFACE 
+        END MODULE SOILCHART__genmod
