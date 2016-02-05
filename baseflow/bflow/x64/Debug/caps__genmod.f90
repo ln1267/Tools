@@ -1,8 +1,0 @@
-        !COMPILER-GENERATED INTERFACE MODULE: Mon Sep 03 21:49:02 2012
-        MODULE CAPS__genmod
-          INTERFACE 
-            SUBROUTINE CAPS(FILE_NAME)
-              CHARACTER(*) :: FILE_NAME
-            END SUBROUTINE CAPS
-          END INTERFACE 
-        END MODULE CAPS__genmod

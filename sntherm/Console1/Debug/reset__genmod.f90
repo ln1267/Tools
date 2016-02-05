@@ -1,7 +1,0 @@
-        !COMPILER-GENERATED INTERFACE MODULE: Fri May 10 09:47:46 2013
-        MODULE RESET__genmod
-          INTERFACE 
-            SUBROUTINE RESET
-            END SUBROUTINE RESET
-          END INTERFACE 
-        END MODULE RESET__genmod
