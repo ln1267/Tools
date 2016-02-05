@@ -3,14 +3,14 @@
     PRO Course_13
      
     ;定义文件路径
-    MyRootDir='I:\AU\Tem-annual\00'
+    MyRootDir='Z:\NingLiu\PhDResearch\Data\AU\Pre-annual\01'
      
     ;遍历文件夹
     filearr = file_search(MyRootDir,'*.nc',count=num);
     data0 = make_array(4110,3476,num)
     name0 = make_array(num,/string)
     help,name0
-    VAR_name = "air_temperature"
+    VAR_name = "lwe_thickness_of_precipitation_amount"
     
     FOR fileindex=0,num-1,1 DO BEGIN
     nid = ncdf_open(filearr[fileindex], /nowrite )
@@ -41,7 +41,7 @@
     
     ncdf_varget, nid, sstid, sst
       help, sst 
-
+    
        for i=0, 4110-1 do begin
          for j=0, 3476-1 do begin
          
@@ -62,8 +62,8 @@
       units = ENVI_TRANSLATE_PROJECTION_UNITS('Degrees')
 
       map_info = ENVI_MAP_INFO_CREATE(/geographic, mc=mc, ps=ps, units=units)
-      
-           
+;      
+;           
 ;    ENVI_ENTER_DATA, sst,BNAMES=filearr[fileindex], map_info=map_info
 ;         
          ENVI_ENTER_DATA, data0,BNAMES=name0, map_info=map_info
