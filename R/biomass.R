@@ -248,26 +248,53 @@ with(a, slope.com(R_veg,C,site, method = 'SMA', alpha = 0.05))
  
 
 # T_TEST        
-## difference of variables for saltbush and pasture
+  ## difference of variables for saltbush and pasture
+  
+  library(Hmisc)
+  describe(plot_f$VEG)
+  describe(plot_10_f$VEG)
+  str(plot_f)
+  linshi<-plot_10_f
+  for (i in 3:15) {
+    
+   a<-t.test(linshi[linshi$VEG==1,i],linshi[linshi$VEG==2,i])
+   print(c(names(linshi)[i],a$p.value))
+    
+  }
+  ## difference of variables for different season
+  linshi1<-plot_10_f
+  linshi2<-plot_f
+  for (i in 3:15) {
+    
+    #a<-t.test(linshi1[linshi1$VEG==2,i],linshi2[linshi2$VEG==2,i])
+    #print(c(names(linshi1)[i],a$p.value))
+    print(names(linshi)[i])
+    print(c(mean(linshi1[linshi1$VEG==2,i]),mean(linshi1[linshi1$VEG==1,i]),mean(linshi2[linshi2$VEG==2,i]),mean(linshi2[linshi2$VEG==1,i])),digits=3)
+  
+    }
+  rm(a,linshi,linshi1,linshi2)
+#----------------------
 
-library(Hmisc)
-describe(plot_f$VEG)
-describe(plot_10_f$VEG)
-str(plot_f)
-linshi<-plot_10_f
-for (i in 3:15) {
+# Spearm test for each variables with Carbon
   
- a<-t.test(linshi[linshi$VEG==1,i],linshi[linshi$VEG==2,i])
- print(c(names(linshi)[i],a$p.value))
+  Mean_VI_bio<-read.table("clipboard",T)
+  Site_VI_bio<-read.table("clipboard",T)
+  RVEG<-read.table("clipboard",T)
+  linshi<-RVEG
+  linshi<-Mean_VI_bio
+  linshi<-Site_VI_bio
+  for (i in c(4:16)){
+    
+#   a<-pspearman::spearman.test(linshi[[i]],linshi[["C"]])
+#   print(c(names(linshi)[i],a$estimate,a$p.value))
+#   
+  # Linear regression model
+  a<-summary.lm(lm(linshi[["C"]] ~ linshi[[i]]))
+  print(c(names(linshi)[i],a$coefficients[1],a$coefficients[2],a$coefficients[8]))  
   
-}
-## difference of variables for different season
-linshi1<-plot_10_f
-linshi2<-plot_f
-for (i in 3:15) {
+  }
+#---------------------
+
+
   
-  #a<-t.test(linshi1[linshi1$VEG==2,i],linshi2[linshi2$VEG==2,i])
-  #print(c(names(linshi1)[i],a$p.value))
-  print(names(linshi)[i])
-  print(c(mean(linshi1[linshi1$VEG==2,i]),mean(linshi1[linshi1$VEG==1,i]),mean(linshi2[linshi2$VEG==2,i]),mean(linshi2[linshi2$VEG==1,i])),digits=3)
-}
+  save(list=ls(),file="result_0205.RData")
