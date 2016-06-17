@@ -242,11 +242,57 @@ cor.test(Site_low_sum$NDVI,ABG_low)
 write.csv(Site_all_c,"images/re_10_com1.csv")
 write.csv(Site_low_sum,"images/low_10_com1.csv")
 
-a$Density[a$Density=="HD"]==1
 
-with(a, slope.com(R_veg,C,site, method = 'SMA', alpha = 0.05)) 
+
+# Slope_TEST 
+
+  library(smatr)
+  a<-Site_VI_bio
+  a<-RVEG
+  a$Density[1:6]<-"HD"
+  a$Site[a$Density=="HD"]<-1
+  a$Site[a$Density=="LD"]<-2
+  with(a, slope.com(RVI,C,Site, method = 'SMA', alpha = 0.05)) 
  
+#-----------
 
+# Anova test
+  Anova_data<-rbind(cbind(plot_f,YEAR=2011),cbind(plot_10_f,YEAR=2010))
+  Anova_data$YEAR<-as.factor(Anova_data$YEAR)
+  Anova_data$VEG<-as.factor(Anova_data$VEG)
+  anova(lm(RVI ~ YEAR * VEG, Anova_data))
+  anova(lm(RVI ~ YEAR +VEG, Anova_data))
+  
+  for (i in 3:15) {
+    
+    .a<-anova(lm(Anova_data[[i]] ~ YEAR +VEG, Anova_data))
+    print(c(names(Anova_data)[i],round(.a[1,5],3),round(.a[2,5],3)))
+    
+  }
+  
+  
+  group<-rep(NA,length(Anova_data$Site))
+  group[Anova_data$YEAR==2010 & Anova_data$VEG==1]<-"A"
+  group[Anova_data$YEAR==2010 & Anova_data$VEG==2]<-"B"
+  group[Anova_data$YEAR==2011 & Anova_data$VEG==1]<-"C"
+  group[Anova_data$YEAR==2011 & Anova_data$VEG==2]<-"D"
+  
+  Anova_data<-cbind(Anova_data,group=group)
+  Anova_data$group<-as.factor(Anova_data$group)
+  summary(Anova_data)
+  ano_result<-c(NA)
+  for (i in 3:15) {
+    
+    .a<-anova(lm(Anova_data[[i]] ~ group, Anova_data))
+    
+    m1<-aov(Anova_data[[i]] ~ group,data=Anova_data)
+    .c<-TukeyHSD(m1)
+    .r<-c(names(Anova_data)[i],round(c(.c$group[,4]),3))
+    print(.r)
+    ano_result<-rbind(ano_result,.r)
+  }
+  plot(.c)
+  
 # T_TEST        
   ## difference of variables for saltbush and pasture
   
@@ -290,11 +336,23 @@ with(a, slope.com(R_veg,C,site, method = 'SMA', alpha = 0.05))
 #   
   # Linear regression model
   a<-summary.lm(lm(linshi[["C"]] ~ linshi[[i]]))
+  print(c(names(linshi)[i],a$coefficients[1],a$coefficients[2],a$coefficients[8]))
+  a<-summary.lm(lm(linshi[linshi$Density=="HD","C"] ~ linshi[linshi$Density=="HD",i]))
   print(c(names(linshi)[i],a$coefficients[1],a$coefficients[2],a$coefficients[8]))  
-  
+
+  a<-summary.lm(lm(linshi[linshi$Density=="LD","C"] ~ linshi[linshi$Density=="LD",i]))
+  print(c(names(linshi)[i],a$coefficients[1],a$coefficients[2],a$coefficients[8])) 
   }
 #---------------------
 
 
   
+  ##  importrance plot for RF
+  a1<-read.table("clipboard",T)
+  .importran<-a1
+  pdf("result/1import.pdf",width=5,family="Times")
+  dotchart(.importran$MeanDecreaseAccuracy[8:1],labels = .importran$var[8:1],xlab="Mean Decrease Accuracy")
+  dev.off()
   save(list=ls(),file="result_0205.RData")
+  
+  
